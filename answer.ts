@@ -48,14 +48,13 @@ const foo = (input: string[]): number => {
     }
 
     rooms = _.uniqWith(rooms, (a, b)=> (_.isEqual(a.sort(), b.sort())))
-    rooms = _.map(rooms, (room)=> (_.map(room, ([a, b])=> ([b, a]))))
     rooms = _.filter(rooms, (room)=> (room.length !== 0))
 
     // step 3: find all open grids
     let openGrids: number[][] = []
 
     for(let room of rooms) {
-        let id = grid[room[0][0]][room[0][1]]
+        let id = grid[room[0][1]][room[0][0]]
 
         if(id === 'O') {
             for(let openGrid of room) {
@@ -80,8 +79,8 @@ const foo = (input: string[]): number => {
                 || _.isEqual([x, y+1], openGrid)
                 || x === 0
                 || y === 0
-                || x === grid.length - 1
-                || y === grid[0].length - 1) {
+                || x === grid[0].length - 1
+                || y === grid.length - 1) {
                     isCloseRoom = false
                 }
             }
